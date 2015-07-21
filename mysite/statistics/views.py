@@ -26,9 +26,6 @@ def index(request):
 			'cities': len(distinct_cities),
 			'users': len(distinct_users)
 			}))
-		response['refresh'] = 5
-		
-		return response
 
 
 	except Exception as e:
@@ -37,7 +34,9 @@ def index(request):
 			'result':'error',
 			'error' : str(e)
 			}))
-		response['refresh'] = 5
+		pass
 
-		return response
+	#Delay in seconds
+	response['refresh'] = 60
+	return response
 
