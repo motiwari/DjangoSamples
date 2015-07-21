@@ -4,6 +4,8 @@ virtualenv ENV
 
 source ENV/bin/activate
 
+cd mysite
+
 pip install -r requirements.txt
 
 python manage.py makemigrations statistics
