@@ -3,6 +3,11 @@ from django.http import HttpResponse
 from django.utils import timezone
 from statistics.models import Messages
 from sets import Set
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 import json
 
@@ -12,21 +17,27 @@ def index(request):
 	try:
 		distinct_cities = Set([x.city for x in messages_manager.all()])
 		distinct_users = Set([x.username for x in messages_manager.all()])
-		'''print distinct_users[4]'''
+		
+		#Uncomment this line to test handling
+		#print distinct_users[4]
 
 		response = HttpResponse(json.dumps({
 			'result':'success',
 			'cities': len(distinct_cities),
 			'users': len(distinct_users)
 			}))
-		response['refresh'] = 60
+		response['refresh'] = 5
 		
 		return response
 
 
-	except Exception,e:
-		return HttpResponse(json.dumps({
+	except Exception as e:
+		logger.error('Something went wrong!')
+		response = HttpResponse(json.dumps({
 			'result':'error',
-			'error': e
+			'error' : str(e)
 			}))
+		response['refresh'] = 5
+
+		return response
 
