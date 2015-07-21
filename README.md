@@ -1,4 +1,6 @@
-```virtualenv ENV
+To run:
+
+virtualenv ENV
 
 source ENV/bin/activate
 
@@ -8,7 +10,7 @@ python manage.py makemigrations statistics
 
 python manage.py migrate
 
-python manage.py runserver```
+python manage.py runserver
 
 Then visit 127.0.0.1:8000/statistics in web browser
 
